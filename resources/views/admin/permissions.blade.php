@@ -185,13 +185,10 @@
                                     {{-- Toggle all --}}
                                     <button type="button"
                                         title="Toggle all {{ $module }} permissions"
-                                        @click="
-                                            allChecked = !allChecked;
-                                            $el.closest('[x-data]').querySelectorAll('input[data-module]').forEach(cb => cb.checked = allChecked);
-                                        "
-                                        class="relative w-9 h-5 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sea-green/40 flex-shrink-0 cursor-pointer"
-                                        :class="allChecked ? 'bg-sea-green' : 'bg-gray-300'">
-                                        <span class="absolute top-[2px] left-[2px] w-4 h-4 bg-white rounded-full shadow transition-transform duration-200"
+                                        @click="allChecked = !allChecked; $el.closest('[x-data]').querySelectorAll('input[data-module]').forEach(cb => cb.checked = allChecked)"
+                                        class="relative w-8 h-4 rounded-full cursor-pointer transition-colors duration-200 outline-none shrink-0"
+                                        :class="allChecked ? 'bg-sea-green' : 'bg-slate-200'">
+                                        <span class="absolute top-[2px] left-[2px] w-3 h-3 bg-white rounded-full shadow-sm transition-transform duration-200"
                                               :class="allChecked ? 'translate-x-4' : 'translate-x-0'"></span>
                                     </button>
                                 </div>
