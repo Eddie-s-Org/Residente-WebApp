@@ -382,6 +382,7 @@ Route::middleware(['auth', 'verified', 'lockout', 'onboarding.complete'])->group
         Route::middleware('role:SA')->prefix('permissions')->name('permissions.')->group(function () {
             Route::get('/', [RolePermissionController::class, 'index'])->name('index');
             Route::put('/{role}', [RolePermissionController::class, 'update'])->name('update');
+            Route::put('/department/{departmentRole}', [RolePermissionController::class, 'updateDepartment'])->name('department.update');
         });
     });
 });
