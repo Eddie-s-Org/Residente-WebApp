@@ -107,4 +107,51 @@ class RolePermissionController extends Controller
 
         return back()->with('success', "{$label} portal access updated.");
     }
+
+    /** Create a new custom system role. */
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name'         => ['required', 'string', 'max:32', 'unique:roles,name', 'regex:/^[a-z0-9_]+$/'],
+            'display_name' => ['required', 'string', 'max:100'],
+            'color'        => ['required', 'string', 'max:20'],
+        ]);
+
+        Role::create($validated);
+
+        return back()->with('success', "Role \"{$validated['display_name']}\" created.");
+    }
+
+    /** Update a role's display name and color (slug is immutable). */
+    public function updateMeta(Request $request, Role $role)
+    {
+        $validated = $request->validate([
+            'display_name' => ['required', 'string', 'max:100'],
+            'color'        => ['required', 'string', 'max:20'],
+        ]);
+
+        $role->update($validated);
+
+        return back()->with('success', "\"" . $role->display_name . "\" updated.");
+    }
+
+    /** Delete a custom role (built-in roles are protected). */
+    public function destroy(Role $role)
+    {
+        $protected = ['SA', 'admin', 'citizen', 'visitor'];
+
+        if (in_array($role->name, $protected)) {
+            return back()->with('error', "Cannot delete built-in role \"{$role->display_name}\".");
+        }
+
+        if ($role->residents()->exists()) {
+            return back()->with('error', "Cannot delete \"{$role->display_name}\" — it still has active users assigned.");
+        }
+
+        $roleName = $role->display_name;
+        $role->permissions()->detach();
+        $role->delete();
+
+        return back()->with('success', "Role \"{$roleName}\" deleted.");
+    }
 }
