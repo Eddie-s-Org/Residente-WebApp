@@ -14,7 +14,7 @@
             padding: 0.875rem 0.875rem 0.5rem;
             font-size: 0.875rem;
             border: 1.5px solid #d1d5db;
-            border-radius: 0.625rem;
+            border-radius: 0.75rem;
             background: #fff;
             outline: none;
             transition: border-color 0.2s, box-shadow 0.2s;
@@ -224,7 +224,7 @@
                     </div>
 
                     {{-- Card --}}
-                    <div class="bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-200/80 overflow-hidden">
+                    <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/60 border border-slate-100 overflow-hidden">
 
                         {{-- Card header --}}
                         <div class="bg-gradient-to-r from-deep-forest to-emerald-800 px-6 sm:px-8 py-5">

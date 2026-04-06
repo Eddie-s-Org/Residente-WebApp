@@ -10,3 +10,6 @@ Artisan::command('inspire', function () {
 
 // Fetch fresh Buguey news every morning at 6:00 AM
 Schedule::command('news:fetch-buguey')->dailyAt('06:00');
+
+// Automated database backup every day at 2:00 AM
+Schedule::command('backup:database')->dailyAt('02:00');
