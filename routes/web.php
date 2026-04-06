@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\HouseholdController;
 use App\Http\Controllers\Admin\VerificationDashboardController;
 use App\Http\Controllers\Admin\ServiceManagementController;
 use App\Http\Controllers\Admin\RolePermissionController;
+use App\Http\Controllers\Admin\BackupMaintenanceController;
 use App\Http\Controllers\Department\AnalyticsController;
 use App\Http\Controllers\Department\MasterCollectionsController;
 use App\Http\Controllers\Department\HouseholdManagementController;
@@ -420,6 +421,17 @@ Route::middleware(['auth', 'verified', 'lockout', 'onboarding.complete'])->group
                 Route::post('/',                                  [\App\Http\Controllers\Admin\ChatbotApiKeyController::class, 'store'])->name('store');
                 Route::patch('/{apiKey}/revoke',                  [\App\Http\Controllers\Admin\ChatbotApiKeyController::class, 'revoke'])->name('revoke');
             });
+        });
+
+        // Backup & Maintenance (SA only)
+        Route::middleware('role:SA')->prefix('backup-maintenance')->name('backup-maintenance.')->group(function () {
+            Route::get('/',                             [\App\Http\Controllers\Admin\BackupMaintenanceController::class, 'index'])->name('index');
+            Route::post('/backup',                      [\App\Http\Controllers\Admin\BackupMaintenanceController::class, 'createBackup'])->name('backup.create');
+            Route::get('/backup/{backupLog}/download',  [\App\Http\Controllers\Admin\BackupMaintenanceController::class, 'downloadBackup'])->name('backup.download');
+            Route::delete('/backup/{backupLog}',        [\App\Http\Controllers\Admin\BackupMaintenanceController::class, 'deleteBackup'])->name('backup.delete');
+            Route::get('/history',                      [\App\Http\Controllers\Admin\BackupMaintenanceController::class, 'history'])->name('history');
+            Route::post('/maintenance-toggle',          [\App\Http\Controllers\Admin\BackupMaintenanceController::class, 'toggleMaintenance'])->name('maintenance.toggle');
+            Route::get('/documentation',                [\App\Http\Controllers\Admin\BackupMaintenanceController::class, 'documentation'])->name('documentation');
         });
     });
 });

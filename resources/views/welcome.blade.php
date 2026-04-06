@@ -302,8 +302,8 @@
                 <div class="flex items-center gap-4">
                     <img src="{{ asset('logo_buguey.png') }}" alt="Municipality of Buguey Official Seal"
                          class="w-12 h-12 object-contain flex-shrink-0">
-                    <div class="flex flex-col leading-none">
-                        <span class="text-[10px] text-sea-green font-bold tracking-[0.12em] uppercase pb-1 border-b border-sea-green inline-block" style="font-family: 'Times New Roman', Times, serif;">Republic of the Philippines</span>
+                    <div class="flex flex-col leading-none">Republic of the Philippines
+                        <span class="text-[10px] text-sea-green font-bold tracking-[0.12em] uppercase pb-1 border-b border-sea-green inline-block" style="font-family: 'Times New Roman', Times, serif;"></span>
                         <span class="font-extrabold text-base sm:text-xl tracking-wide leading-tight uppercase text-gray-900 mt-1" style="font-family: 'Times New Roman', Times, serif;">Municipality of Buguey</span>
                         <span class="text-[9px] text-sea-green font-semibold tracking-widest uppercase mt-0.5 hidden sm:block" style="font-family: 'Times New Roman', Times, serif;">#Buguey #DigitalGovernance #RESIDENTE</span>
                     </div>
@@ -330,7 +330,7 @@
         </div>
 
         {{-- Section 3: Navigation Bar --}}
-        <nav class="bg-white border-b-2 border-gray-300" aria-label="Site navigation">
+        <nav class="bg-white border-b border-gray-200" aria-label="Site navigation">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="hidden md:flex items-center">
                     <a href="{{ url('/') }}"              class="nav-gov-link text-emerald-700 font-bold">Home</a>
@@ -480,7 +480,7 @@
     </script>
 
     <!-- Hero Section -->
-    <div class="relative overflow-hidden min-h-screen flex items-center">
+    <div class="relative overflow-hidden h-screen flex items-center justify-center">
         <!-- Background Video -->
         <video
             autoplay
@@ -499,13 +499,13 @@
         <div class="absolute inset-y-0 left-0 w-1/2 bg-emerald-900 rounded-r-full opacity-20 blur-3xl pointer-events-none"></div>
 
         <!-- Content -->
-        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-8 relative z-10">
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 relative z-10">
             <div class="text-center max-w-3xl mx-auto">
 
                 <!-- Location badge -->
                 <div class="inline-flex items-center gap-2 mb-6 anim-hero-title">
                     <span class="section-label bg-white/10 text-white/80 border border-white/25 backdrop-blur-sm">
-                        Republic of the Philippines &nbsp;·&nbsp; Province of Cagayan
+                        Province of Cagayan
                     </span>
                 </div>
 
@@ -555,7 +555,7 @@
             </div>
 
             <!-- Acronym Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-9 gap-px bg-white/5 rounded-2xl overflow-hidden border border-white/10">
+            <div class="flex overflow-x-auto gap-px bg-white/5 rounded-2xl border border-white/10">
                 @php
                 $acronym = [
                     ['R', 'Resident Records',     'Centralized household & resident data registry',         'bg-emerald-500/10 text-emerald-400'],
@@ -571,7 +571,7 @@
                 @endphp
 
                 @foreach($acronym as $i => [$letter, $label, $desc, $color])
-                <div class="reveal reveal-delay-{{ min($i + 1, 5) }} flex flex-col items-center text-center p-5 bg-white/[0.03] hover:bg-white/[0.07] transition-colors duration-200 group cursor-default">
+                <div class="reveal reveal-delay-{{ min($i + 1, 5) }} flex-1 min-w-[100px] flex flex-col items-center text-center p-5 bg-white/[0.03] hover:bg-white/[0.07] transition-colors duration-200 group cursor-default">
                     <!-- Big Letter -->
                     <div class="w-12 h-12 rounded-xl {{ $color }} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-200">
                         <span class="text-2xl font-black" style="font-family: 'Georgia', serif;">{{ $letter }}</span>
@@ -582,19 +582,6 @@
                     <p class="text-white/35 text-[10px] leading-snug hidden lg:block">{{ $desc }}</p>
                 </div>
                 @endforeach
-            </div>
-
-            <!-- Bottom CTA -->
-            <div class="mt-6 text-center reveal">
-                <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                    <a href="{{ route('register') }}" class="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-golden-glow hover:opacity-90 text-deep-forest text-sm font-bold rounded-xl transition shadow-lg shadow-yellow-500/20">
-                        Register as Resident
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
-                    </a>
-                    <a href="{{ route('login') }}" class="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-white/8 hover:bg-white/15 text-white text-sm font-medium rounded-xl transition border border-white/15">
-                        Sign In
-                    </a>
-                </div>
             </div>
         </div>
     </section>
@@ -1416,21 +1403,33 @@
             </div>
 
             <div>
-                <h3 class="text-golden-glow font-bold mb-4 text-xs uppercase tracking-widest">Emergency Hotlines</h3>
-                <ul class="space-y-2 text-sm">
-                    <li class="flex items-center gap-2">
+                <h3 class="text-golden-glow font-bold mb-4 text-xs uppercase tracking-widest">LGU Hotlines</h3>
+                <div class="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
+                    <div class="flex items-center gap-2">
+                        <span class="text-tiger-orange font-bold">BORT:</span>
+                        <span class="text-gray-300">0953 234 9545</span>
+                    </div>
+                    <div class="flex items-center gap-2">
                         <span class="text-tiger-orange font-bold">PNP:</span>
-                        <span class="text-gray-300">000-000-0000</span>
-                    </li>
-                    <li class="flex items-center gap-2">
-                        <span class="text-tiger-orange font-bold">BFP:</span>
-                        <span class="text-gray-300">000-000-0000</span>
-                    </li>
-                    <li class="flex items-center gap-2">
+                        <span class="text-gray-300">0915 229 9200</span>
+                    </div>
+                    <div class="flex items-center gap-2">
                         <span class="text-tiger-orange font-bold">MDRRMO:</span>
-                        <span class="text-gray-300">000-000-0000</span>
-                    </li>
-                </ul>
+                        <span class="text-gray-300">0953 234 9544</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-tiger-orange font-bold">MHO:</span>
+                        <span class="text-gray-300">0935 062 6001</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-tiger-orange font-bold">BFP:</span>
+                        <span class="text-gray-300">0917 165 9224</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-tiger-orange font-bold">SEPD:</span>
+                        <span class="text-gray-300">0945 286 7165</span>
+                    </div>
+                </div>
                 <div class="mt-4 text-xs text-gray-500 space-y-1 pt-3">
                     <p>✉️ &nbsp;lgu.buguey@gmail.com</p>
                     <p>🕒 &nbsp;Mon – Fri &nbsp; 8:00 AM – 5:00 PM</p>

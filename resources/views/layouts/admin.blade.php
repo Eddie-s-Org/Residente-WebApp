@@ -223,6 +223,22 @@
                     </a>
                     @endif
 
+                    @if($isSA)
+                    @php $active = request()->routeIs('admin.backup-maintenance.*'); @endphp
+                    <a href="{{ route('admin.backup-maintenance.index') }}"
+                       class="group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all duration-150
+                       {{ $active ? $activeItem : 'text-white/55 hover:bg-white/8 hover:text-white' }}">
+                        <span class="w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0
+                            {{ $active ? $activeIcon : 'bg-white/10 text-white/50 group-hover:bg-white/15 group-hover:text-white/90' }}">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                            </svg>
+                        </span>
+                        <span class="flex-1">Backup & Maintenance</span>
+                        @if($active)<span class="w-2 h-2 rounded-full {{ $activeDot }} flex-shrink-0"></span>@endif
+                    </a>
+                    @endif
+
                 </nav>
             </div>
 

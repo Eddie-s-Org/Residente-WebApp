@@ -7,20 +7,20 @@
 @endpush
 
 @section('content')
-<div class="bg-gray-50 antialiased font-sans min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
+<div class="bg-slate-50 antialiased font-sans min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
     <div class="w-full max-w-2xl">
-        
+
         {{-- Header with Progress --}}
         <div class="mb-8 text-center">
-            <h2 class="text-3xl font-extrabold text-deep-forest">Profile Setup</h2>
-            <p class="text-gray-600 mt-2">Step {{ $currentStep }} of {{ $totalSteps }}: <span class="text-sea-green font-bold">Identity</span></p>
-            
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-deep-forest">Profile Setup</h2>
+            <p class="text-slate-500 mt-2">Step {{ $currentStep }} of {{ $totalSteps }}: <span class="text-sea-green font-bold">Identity</span></p>
+
             {{-- Progress Bar --}}
-            <div class="w-full bg-gray-200 rounded-full h-2.5 mt-6 relative overflow-hidden">
-                <div class="bg-sea-green h-2.5 rounded-full transition-all duration-500" 
+            <div class="w-full bg-slate-200 rounded-full h-2 mt-6 relative overflow-hidden">
+                <div class="bg-gradient-to-r from-deep-forest to-sea-green h-2 rounded-full transition-all duration-500"
                      style="width: {{ ($currentStep / $totalSteps) * 100 }}%"></div>
             </div>
-            <div class="flex justify-between text-xs text-gray-500 mt-2 font-bold uppercase tracking-wide">
+            <div class="flex justify-between text-xs text-slate-400 mt-3 font-semibold uppercase tracking-wide">
                 <span class="text-sea-green">Location ✓</span>
                 <span class="text-sea-green">Role ✓</span>
                 <span class="text-sea-green">Identity</span>
@@ -29,19 +29,19 @@
         </div>
 
         {{-- Step Content --}}
-        <div class="bg-white rounded-xl shadow-xl border-t-4 border-deep-forest overflow-hidden">
-            
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+
             <div class="p-8">
                 <div class="flex items-center mb-6">
-                    <div class="flex-shrink-0 bg-deep-forest rounded-full p-3">
+                    <div class="flex-shrink-0 bg-deep-forest rounded-xl p-3">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                   d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                         </svg>
                     </div>
                     <div class="ml-4">
                         <h3 class="text-xl font-bold text-deep-forest">Identity Key (HHM)</h3>
-                        <p class="text-sm text-gray-600">Confirm your relationship within the household</p>
+                        <p class="text-sm text-slate-500">Confirm your relationship within the household</p>
                     </div>
                 </div>
 
@@ -49,14 +49,14 @@
                     @csrf
 
                     {{-- Identity Preview --}}
-                    <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                    <div class="bg-slate-50 rounded-2xl p-6 mb-6">
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <span class="text-xs text-gray-500 uppercase tracking-wide">Full Name</span>
+                                <span class="text-xs text-slate-400 uppercase tracking-wide">Full Name</span>
                                 <p class="text-lg font-semibold text-gray-900">{{ $resident->full_name }}</p>
                             </div>
                             <div>
-                                <span class="text-xs text-gray-500 uppercase tracking-wide">Surname</span>
+                                <span class="text-xs text-slate-400 uppercase tracking-wide">Surname</span>
                                 <p class="text-lg font-semibold text-gray-900">{{ $resident->last_name }}</p>
                             </div>
                         </div>
@@ -64,11 +64,11 @@
 
                     {{-- Relationship to Head --}}
                     <div class="mb-6">
-                        <label for="relationship" class="block text-sm font-medium text-gray-700">
+                        <label for="relationship" class="block text-sm font-medium text-slate-600">
                             Relationship to Household Head *
                         </label>
                         <select name="relationship" id="relationship" required
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sea-green focus:ring-sea-green sm:text-sm">
+                                class="mt-1 block w-full rounded-xl border-slate-200 shadow-sm focus:border-sea-green focus:ring-sea-green sm:text-sm">
                             <option value="">Select Relationship</option>
                             @if($resident->is_household_head)
                                 <option value="Self (Head)" selected>Self (Head of Household)</option>
@@ -94,7 +94,7 @@
                     </div>
 
                     {{-- Info Box --}}
-                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <div class="bg-blue-50 border border-blue-100 rounded-2xl p-4">
                         <div class="flex">
                             <div class="flex-shrink-0">
                                 <svg class="h-5 w-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
@@ -114,14 +114,14 @@
                     {{-- Navigation Buttons --}}
                     <div class="mt-8 flex justify-between">
                         <a href="{{ route('profile.setup', ['step' => 2]) }}"
-                           class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                           class="inline-flex items-center px-4 py-2 border border-slate-200 text-sm font-semibold rounded-xl text-slate-600 bg-white hover:bg-slate-50">
                             <svg class="mr-2 -ml-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12"/>
                             </svg>
                             Back
                         </a>
                         <button type="submit"
-                                class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-sea-green hover:bg-deep-forest focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sea-green transition-colors">
+                                class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-xl shadow-sm text-white bg-gradient-to-r from-deep-forest to-sea-green hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sea-green transition-colors">
                             Continue to Final Step
                             <svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
