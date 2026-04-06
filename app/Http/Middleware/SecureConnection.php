@@ -35,17 +35,31 @@ class SecureConnection
 
         $response = $next($request);
 
+        $isLocalDev = app()->environment(['local', 'development']);
+        $scriptSrc = "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com";
+        $styleSrc = "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com";
+        $connectSrc = "connect-src 'self'";
+
+        if ($isLocalDev) {
+            $viteOrigins = ' http://localhost:5173 http://127.0.0.1:5173';
+            $viteWsOrigins = ' ws://localhost:5173 ws://127.0.0.1:5173';
+
+            $scriptSrc .= $viteOrigins;
+            $styleSrc .= $viteOrigins;
+            $connectSrc .= $viteOrigins . $viteWsOrigins;
+        }
+
         // Add comprehensive security headers
         $response->headers->set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
         
         // Content Security Policy - Allow only trusted sources
         $response->headers->set('Content-Security-Policy', 
             "default-src 'self'; " .
-            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com; " .
-            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " .
+            $scriptSrc . "; " .
+            $styleSrc . "; " .
             "font-src 'self' https://fonts.gstatic.com data:; " .
             "img-src 'self' data: https:; " .
-            "connect-src 'self'; " .
+            $connectSrc . "; " .
             "frame-ancestors 'none'; " .
             "base-uri 'self'; " .
             "form-action 'self';"
